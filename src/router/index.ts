@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import CitiesList from "../components/CitiesList";
+import CitiesList from "/components/CitiesList";
 import CitiesMap from "../components/CitiesMap";
 import City from "../components/City";
 import EasterEgg from "../components/EasterEgg";

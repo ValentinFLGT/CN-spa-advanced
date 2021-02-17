@@ -1,35 +1,37 @@
 <template>
   <div>
-    <h2>{{name}}</h2>
-    <p>Temps : {{weather}} - Température : {{temperature}}°C</p>
-    <p><em>Dernière mise à jour : {{formattedDate}}</em></p>
+    <h2>{{ name }}</h2>
+    <p>Temps : {{ weather }} - Température : {{ temperature }}°C</p>
+    <p><em>Dernière mise à jour : {{ formattedDate }}</em></p>
   </div>
 </template>
 
-<script>
-  import {format, register} from 'timeago.js';
-  import timeAgoFr from  'timeago.js/esm/lang/fr';
+<script lang="ts">
+import {Prop} from 'vue-property-decorator';
+import {format} from "timeago.js";
 
-  register('fr', timeAgoFr);
+export default class City {
 
-  export default {
-    name: 'City',
-    props: {
-      name: String,
-      weather: String,
-      temperature: Number,
-      updatedAt: Date
-    },
-    computed: {
-      formattedDate: function() {
-        return format(this.updatedAt, 'fr');
-      }
-    }
+  constructor(name: string, weather: string, temperature: number, updatedAt: Date) {
+    this.name = name
+    this.weather = weather
+    this.temperature = temperature
+    this.updatedAt = updatedAt
   }
+
+  @Prop() private name: string;
+  @Prop() private weather: string;
+  @Prop() private temperature: number;
+  @Prop() private readonly updatedAt: Date;
+
+  get formattedDate(): string {
+    return format(this.updatedAt, 'fr')
+  }
+}
 </script>
 
 <style scoped>
-  h1 {
-    margin: 40px 0 0;
-  }
+h1 {
+  margin: 40px 0 0;
+}
 </style>
